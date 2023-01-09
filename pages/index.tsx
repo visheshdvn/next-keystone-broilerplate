@@ -2,10 +2,19 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
+// import {useEffect} from "react"
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  // useEffect(()=> {
+  //   async function fetchData() {
+  //     const data = await fetch('http://localhost:3000/api');
+  //     console.log(data);
+  //   }
+  //   fetchData();
+  // }, [])
+
   return (
     <>
       <Head>
