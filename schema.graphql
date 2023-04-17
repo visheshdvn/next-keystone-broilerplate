@@ -8,6 +8,7 @@ type AdminUser {
   password: PasswordState
   createdAt: DateTime
   blocked: AdminUserBlockedType
+  roles: [AdminUserRoleType!]
 }
 
 type PasswordState {
@@ -19,6 +20,13 @@ scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339
 enum AdminUserBlockedType {
   blocked
   unblocked
+}
+
+enum AdminUserRoleType {
+  SUPERUSER
+  ADMIN
+  CREATOR
+  PUBLIC
 }
 
 input AdminUserWhereUniqueInput {
@@ -119,6 +127,7 @@ input AdminUserUpdateInput {
   password: String
   createdAt: DateTime
   blocked: AdminUserBlockedType
+  roles: [AdminUserRoleType!]
 }
 
 input AdminUserUpdateArgs {
@@ -132,6 +141,7 @@ input AdminUserCreateInput {
   password: String
   createdAt: DateTime
   blocked: AdminUserBlockedType
+  roles: [AdminUserRoleType!]
 }
 
 type Post {

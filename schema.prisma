@@ -19,6 +19,7 @@ model AdminUser {
   password  String
   createdAt DateTime?             @default(now())
   blocked   AdminUserBlockedType?
+  roles     Json                  @default("[]")
 }
 
 model Post {

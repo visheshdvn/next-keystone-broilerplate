@@ -5,29 +5,23 @@
 // If you want to learn more about how lists are configured, please read
 // - https://keystonejs.com/docs/config/lists
 
-import { list } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
+import { list } from "@keystone-6/core";
+import { allowAll } from "@keystone-6/core/access";
 
 // see https://keystonejs.com/docs/fields/overview for the full list of fields
 //   this is a few common fields for an example
-import {
-  text,
-  relationship,
-  password,
-  timestamp,
-  select,
-} from '@keystone-6/core/fields';
+import { text, password, timestamp, select, multiselect } from "@keystone-6/core/fields";
 
 // the document field is a more complicated field, so it has it's own package
-import { document } from '@keystone-6/fields-document';
+import { document } from "@keystone-6/fields-document";
 // if you want to make your own fields, see https://keystonejs.com/docs/guides/custom-fields
 
 // when using Typescript, you can refine your types to a stricter subset by importing
 // the generated types from '.keystone/types'
-import type { Lists } from '.keystone/types';
+import type { Lists } from ".keystone/types";
 
 export const lists: Lists = {
-    AdminUser: list({
+  AdminUser: list({
     // WARNING
     //   for this starter project, anyone can create, query, update and delete anything
     //   if you want to prevent random people on the internet from accessing your data,
@@ -44,18 +38,30 @@ export const lists: Lists = {
         validation: { isRequired: true },
         // by adding isIndexed: 'unique', we're saying that no user can have the same
         // email as another user - this may or may not be a good idea for your project
-        isIndexed: 'unique',
+        isIndexed: "unique",
       }),
 
       password: password({ validation: { isRequired: true } }),
 
       createdAt: timestamp({
         // this sets the timestamp to Date.now() when the user is first created
-        defaultValue: { kind: 'now' },
+        defaultValue: { kind: "now" },
       }),
       blocked: select({
+        type: "enum",
+        options: [
+          { label: "Blocked", value: "blocked" },
+          { label: "Not Blocked", value: "unblocked" },
+        ],
+      }),
+      roles: multiselect({
         type: 'enum',
-        options: [{label: "Blocked", value: 'blocked'}, {label: "Not Blocked", value: 'unblocked'}]
+        options: [
+          { label: "Superuser", value: "SUPERUSER" },
+          { label: "Admin", value: "ADMIN" },
+          { label: "Creator", value: "CREATOR" },
+          { label: "Public", value: "PUBLIC" },
+        ],
       })
     },
   }),

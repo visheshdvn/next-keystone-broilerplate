@@ -8,13 +8,13 @@ import { context } from "../../lib/keystone/context";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // const context: Context = (globalThis as any).keystoneContext || getContext(config, PrismaModule);
     if (req.method === "GET") {
-        console.log(await context.query.User.findMany({query: `id name blocked`}));
+        console.log(await context.query.AdminUser.findMany({query: `id name blocked`}));
         // console.log(await context.prisma.user.findMany({
         //     select: {
         //         name: true
         //     }
         // }));
         
-        return  res.status(200).json(await context.db.User.findMany());
+        return  res.status(200).json(await context.db.AdminUser.findMany());
     }
 }

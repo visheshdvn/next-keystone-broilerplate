@@ -6,16 +6,16 @@
 //   you can find out more at https://keystonejs.com/docs/apis/config
 
 import { config } from "@keystone-6/core";
-
+import * as dotenv from "dotenv";
 // to keep this file tidy, we define our schema in a different file
 import { lists } from "./schema";
 
 // authentication is configured separately here too, but you might move this elsewhere
 // when you write your list-level access control functions, as they typically rely on session data
 import { withAuth, session } from "./auth";
+dotenv.config();
 
-export default
-withAuth(
+export default withAuth(
   config({
     db: {
       // we're using sqlite for the fastest startup experience
